@@ -16,6 +16,7 @@ Ygiven = [14.0, 18.222, 18.0, 17.216, 16.444, 15.778, 15.219, 14.749, 14.352,
           14.014, 13.722, 13.469, 13.248, 13.052, 12.879, 12.724]
 
 bestB = []
+print('Calculated bі:')
 minCriterion = 100
 for n in range(15):
     # find bi
@@ -27,6 +28,9 @@ for n in range(15):
     transposedX = X.transpose()
     reversedXtX = np.linalg.inv(transposedX.dot(X))
     B = (reversedXtX.dot(transposedX)).dot(Y)
+    print('n = {0} => bi: {1}'.format(n + 1, [round(float(B[i]), 6) for i in
+                                              range(len(B))]))
+
     # method of least squares
     criterion = sum([(function(Xgiven[i], B) - Ygiven[i]) ** 2 for i in
                      range(len(Xgiven))])
@@ -34,9 +38,8 @@ for n in range(15):
         minCriterion = criterion
         bestB = B
 
-print('Least squares criterion =', float(minCriterion))
-print('Calculated the best bі:', [round(float(bestB[i]), 6) for i in
-                                  range(len(bestB))])
+print('\nLeast squares criterion =', float(minCriterion))
+print('The best bі:', [round(float(bestB[i]), 6) for i in range(len(bestB))])
 print('Calculated y:', [round((float(function(Xgiven[i], bestB))), 3) for i in
                         range(len(Xgiven))])
 print('Given y:', Ygiven)
